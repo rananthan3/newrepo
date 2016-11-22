@@ -1,0 +1,118 @@
+<html>
+    <head>
+    <script src="codebase/webix.js" type="text/javascript"></script>
+	<!--><script src="codebase/spreadsheet.js" type="text/javascript"></script><!-->
+ 
+	<link rel="stylesheet" type="text/css" href="codebase/webix.css">
+	<!--><link rel="stylesheet" type="text/css" href="codebase/spreadsheet.css"><!-->
+    </head>
+	<body>
+        <script type="text/javascript" charset="utf-8">
+
+	var base_data = {
+
+  "data": [
+  //[{"uniqueNodeCount": "1", "jobEntryType": "E", "session": "30724", "owner": "lcoop22@oppenheimer.neurology.emory.edu", "group": "cci-users", "needNodes": "1", "etime": "1466614853", "start": "1466614854", "cpuTotal": "02:27:06", "exec_host": "hpg6-03/4+hpg6-03/5+hpg6-03/6+hpg6-03/7", "resourcesUsedWallTime": "01:45:05", "qtime": "1466614853", "totExecSlots": "4", "jobname": "TCGA-DX-A6YT-01Z-00-DX4", "user": "lcoop22", "endtime": "1466621162", "resourcesedUsedVMem": "9586764kb", "resourcesUsedMem": "7036256kb", "ctime": "1466614853", "needppn": "4", "queue": "batch", "needResourceName": "matlab Resource_List.nodect=1 Resource_List.nodes=1:ppn=4:matlab", "ndwalltime": "24:00:00", "exitStatus": "0"}]
+    [1,1,"UniqueNodeCount"],
+    [1,2,"jobEntryType"],
+    [1,3,"session"],
+	[1,4,"owner"],
+	[1,5,"group"],
+	[1,6,"needNodes"],
+	[1,7,"eTime"],
+	[1,8, "start"],
+	[1,9, "blah"],
+	
+    [2,1,"1"],
+    [2,2,"E"],
+    [2,3,"30724"],
+	[2,4,"lcoop22@oppenheimer.neurology.emory.edu"],
+	[2,5,"cci-users"],
+	[2,6,"1"],
+	[2,7,"1466614853"],
+	[2,8,"1466614854"]
+    
+    
+  ]
+
+};	
+
+
+var multiple_dataset = [
+    { hpg601:"60", hpg602:"35", hpg603:"55", year:"02" },
+    { hpg601:"40", hpg602:"24", hpg603:"40", year:"03" },
+    { hpg601:"44", hpg602:"20", hpg603:"27", year:"04" },
+    { hpg601:"23", hpg602:"50", hpg603:"43", year:"05" }
+    
+];
+		
+		
+	webix.ui({
+		view: "tabview",
+		cells: [
+	{
+      header: "DataTable",
+      body: {
+        view:"datatable",
+		autoConfig: true,
+		url: "executedJobs.json"
+      }
+    },
+	{
+      header: "SpreadSheet",
+      body: {
+			view:"spreadsheet",
+			//loaded data object
+			data: base_data
+			}
+	},
+	{
+      header: "Webix Graph",
+      body: {
+        
+		view:"chart",
+			type:"bar",
+			data: multiple_dataset,
+			xAxis:{template:"#year#"},			
+			series:[
+        {   // 1st company - turquoise blue bars
+            value:"#hpg601#",
+            color: "#58dccd", 
+            tooltip:{
+                template:"#hpg601#"
+            }
+        },
+        {   //2nd company - green bars
+            value:"#hpg602#",
+            color:"#a7ee70",
+            tooltip:{
+                template:"#hpg602#"
+            }
+        },
+        {   // 3rd company - blue bars
+            value:"#hpg603#",  
+            color:"#36abee",
+            tooltip:{
+                template:"#hpg603#"
+            }
+    }]
+		
+			}
+	},
+	{
+      header: "Plotly Graph",
+      body: {
+        id: "formView",
+        view: "form",
+		elements: [{view:"button",value:"Brad"}]
+			}
+	}
+	
+	]
+	
+	});
+
+	</script>	
+    </body>
+</html>
+
