@@ -8,6 +8,106 @@
     </head>
 	<body>
         <script type="text/javascript" charset="utf-8">
+		
+		
+	var cpu_dataset = [
+	{ hours:"20 hours", workload:"Nuclei Detection", color: "#ee3639" },
+	{ hours:"30 hours", workload:"Segmentation", color: "#ee9e36" },
+	{ hours:"50 hours", workload:"Database", color: "#eeea36" },
+	];		
+		
+		
+	var multiple_dataset_numbers = [
+	{ sales:"20", sales2:"35", sales3:"55", year:"02" },
+	{ sales:"40", sales2:"24", sales3:"40", year:"03" },
+	{ sales:"44", sales2:"20", sales3:"27", year:"04" },
+	{ sales:"23", sales2:"50", sales3:"43", year:"05" },
+	{ sales:"21", sales2:"36", sales3:"31", year:"06" },
+	{ sales:"50", sales2:"40", sales3:"56", year:"07" },
+	{ sales:"30", sales2:"65", sales3:"75", year:"08" },
+	{ sales:"90", sales2:"62", sales3:"55", year:"09" },
+	{ sales:"55", sales2:"40", sales3:"60", year:"10" },
+	{ sales:"72", sales2:"45", sales3:"54", year:"11" }
+	];
+			
+		
+	var cells = [	
+        {
+		header: "Pie",
+		body: {
+			view: "chart",
+			type:"pie",
+			value:"#hours#",
+			color:"#color#",
+			label:"#workload#",
+			pieInnerText:"#hours#",
+			shadow:0,
+			data:cpu_dataset
+			}
+		},
+		{
+        header: "Line",
+		body: {
+		 
+				view:"chart",            
+				type:"line",
+
+				xAxis:{
+					template:"'#year#",
+					title: "Year"
+					
+				},
+				yAxis:{
+					start:0,
+					step:10,
+					end: 100,
+					title: "Avg CPU Utilization"
+				},
+				legend:{
+					values:[{text:"HPG6-09",color:"#1293f8"},{text:"HPG6-10",color:"#66cc00"}],
+					align:"right",
+					valign:"middle",
+					layout:"y",
+					width: 100,
+					margin: 8
+				},
+				series:[
+					{
+						value:"#sales#",
+						item:{
+							borderColor: "#1293f8",
+							color: "#ffffff"
+						},
+						line:{
+							color:"#1293f8",
+							width:3
+						},
+						tooltip:{
+							template:"#sales#"
+						}
+					},
+					{
+						value:"#sales2#",
+						item:{
+							borderColor: "#66cc00",
+							color: "#ffffff"
+						},
+						line:{
+							color:"#66cc00",
+							width:3
+						},
+						tooltip:{
+							template:"#sales2#"
+						}
+					}
+				],
+				data:  multiple_dataset_numbers
+			}
+		}
+	];
+
+		
+
 
 	var base_data = {
 
@@ -73,7 +173,20 @@ var multiple_dataset = [
 		view:"chart",
 			type:"bar",
 			data: multiple_dataset,
-			xAxis:{template:"#year#"},			
+			xAxis:{template:"#year#", title:"Year"},
+			yAxis:{
+			    start:0,
+			    step:10,
+			    end:100,
+				title: "Percentage Utilization"
+			},
+			legend:{
+				values:[{text:"HPG6-01",color:"#58dccd"},{text:"HPG6-02",color:"#a7ee70"},{text:"HPG6-03",color:"#36abee"}],
+				valign:"middle",
+				align:"right",
+				width:90,
+				layout:"y"
+            },
 			series:[
         {   // 1st company - turquoise blue bars
             value:"#hpg601#",
@@ -102,13 +215,19 @@ var multiple_dataset = [
 	{
       header: "Plotly Graph",
       body: {
-        id: "formView",
-        view: "form",
-		elements: [{view:"button",value:"Brad"}]
-			}
-	}
+        
+		
+			container: "areaA",
+			view:"tabview",
+			id:"tabview1",
+			animate:false,
+			cells:cells
+		
+	}//endbody
+	}//end4thtabcells
+	]//endtabcells
 	
-	]
+	
 	
 	});
 
